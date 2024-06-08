@@ -1,8 +1,9 @@
+import stylesButton from "../../styles/button.module.css";
 import styles from "./TodoList.module.css";
 
-import { clsx } from "clsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { clsx } from "clsx";
 
 export const TodoList = () => {
   return (
@@ -16,8 +17,10 @@ export const TodoList = () => {
         <span>Tarefa 1</span>
         <button
           className={clsx(
-            styles["todo-list__icon-button"],
-            styles["todo-list__icon-button--delete"]
+            stylesButton["button"],
+            stylesButton["button--danger"],
+            stylesButton["button--icon"],
+            styles["todo-list__button"]
           )}
         >
           <FontAwesomeIcon icon={faTrash} />

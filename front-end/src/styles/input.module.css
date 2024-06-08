@@ -1,0 +1,25 @@
+.input-text {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--app-border-radius-sm);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.input-text:focus {
+  outline: 2px solid var(--app-palette-primary);
+}
+
+.input-text--primary {
+  background: var(--app-palette-primary);
+  color: var(--app-palette-text-primary);
+}
+
+.input-text--primary::placeholder {
+  color: var(--app-palette-grey400);
+}
+
+.input-text--full {
+  display: block;
+  width: 100%;
+}

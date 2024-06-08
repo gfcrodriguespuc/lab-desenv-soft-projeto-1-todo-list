@@ -1,0 +1,43 @@
+/*
+CSS HEX
+--hunter-green: #386641ff;
+--asparagus: #6a994eff;
+--yellow-green: #a7c957ff;
+--parchment: #f2e8cfff;
+--bittersweet-shimmer: #bc4749ff;
+
+CSS HSL
+--hunter-green: hsla(132, 29%, 31%, 1);
+--asparagus: hsla(98, 32%, 45%, 1);
+--yellow-green: hsla(78, 51%, 56%, 1);
+--parchment: hsla(43, 57%, 88%, 1);
+--bittersweet-shimmer: hsla(359, 47%, 51%, 1);
+*/
+
+:root {
+  --app-palette-primary: #386641;
+  --app-palette-secondary: #6a994e;
+  --app-palette-tertiary: #a7c957;
+  --app-palette-danger: #bc4749;
+
+  --app-palette-white: #fff;
+
+  --app-palette-grey100: #f5f5f5;
+  --app-palette-grey200: #eeeeee;
+  --app-palette-grey400: #bdbdbd;
+  --app-palette-grey700: #616161;
+
+  --app-palette-text-primary: #f2e8cf;
+  --app-palette-text-secondary: #bc4749;
+
+  --app-border-radius-sm: 4px;
+  --app-border-radius-md: 6px;
+  --app-border-radius-lg: 8px;
+  --app-border-radius-xl: 12px;
+  --app-border-radius-full: 999px;
+}
+
+body {
+  background: var(--app-palette-tertiary);
+  color: var(--app-palette-text-primary);
+}
