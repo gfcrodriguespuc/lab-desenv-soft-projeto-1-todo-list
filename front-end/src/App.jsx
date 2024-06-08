@@ -1,9 +1,11 @@
 import styles from "./App.module.css";
 
+import { TodoWrapper } from "./components/TodoWrapper";
+
 export const App = () => {
   return (
     <div className={styles["app"]}>
-      <h1>Lista de Tarefas</h1>
+      <TodoWrapper />
     </div>
   );
 };
