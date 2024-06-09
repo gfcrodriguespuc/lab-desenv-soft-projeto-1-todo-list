@@ -1,0 +1,24 @@
+.todo-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+  max-width: 600px;
+  padding: 16px;
+  margin: 0 auto;
+
+  background: var(--app-palette-secondary);
+  border-radius: var(--app-border-radius-md);
+}
+
+.todo-wrapper__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--app-palette-text-primary);
+  text-align: center;
+}
+
+.todo-wrapper__form {
+  margin: 0 0 16px 0;
+}
