@@ -27,6 +27,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        # https://stackoverflow.com/questions/57806624/github-actions-how-to-build-project-in-sub-directory
+        working-directory: front-end
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
