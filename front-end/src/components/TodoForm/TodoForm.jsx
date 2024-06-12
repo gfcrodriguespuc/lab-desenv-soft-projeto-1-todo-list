@@ -5,10 +5,25 @@ import styles from "./TodoForm.module.css";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
+import { useState } from "react";
 
-export const TodoForm = () => {
+export const TodoForm = ({ addTodo }) => {
+  const [todoDescription, setTodoDescription] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const todoDescriptionTrim = todoDescription.trim();
+    if (!todoDescriptionTrim) {
+      return;
+    }
+
+    addTodo(todoDescriptionTrim);
+    setTodoDescription("");
+  };
+
   return (
-    <form className={styles["todo-form"]}>
+    <form className={styles["todo-form"]} onSubmit={handleSubmit}>
       <input
         className={clsx(
           inputStyles["input-text"],
@@ -17,6 +32,8 @@ export const TodoForm = () => {
         )}
         type="text"
         placeholder="Qual sua nova tarefa?"
+        value={todoDescription}
+        onChange={(event) => setTodoDescription(event.target.value)}
       />
       <button
         className={clsx(
