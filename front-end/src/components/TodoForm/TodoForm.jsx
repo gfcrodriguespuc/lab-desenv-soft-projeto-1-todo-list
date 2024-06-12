@@ -12,7 +12,6 @@ export const TodoForm = ({ addTodo }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const input = event.target.querySelector("input");
 
     const todoDescriptionTrim = todoDescription.trim();
     if (!todoDescriptionTrim) {
@@ -20,7 +19,7 @@ export const TodoForm = ({ addTodo }) => {
     }
 
     addTodo(todoDescriptionTrim);
-    input.value = "";
+    setTodoDescription("");
   };
 
   return (
