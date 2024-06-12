@@ -1,0 +1,40 @@
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: var(--app-border-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.button:active:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button--primary {
+  background: var(--app-palette-primary);
+  color: var(--app-palette-text-primary);
+}
+
+.button--danger {
+  background: var(--app-palette-danger);
+  color: var(--app-palette-text-primary);
+}
+
+.button--icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
