@@ -7,11 +7,7 @@ import { TodoForm } from "../TodoForm";
 import { TodoList } from "../TodoList";
 
 export const TodoWrapper = () => {
-  const [todos, setTodos] = useState([
-    { id: 1, description: "Estudar React", completed: false },
-    { id: 2, description: "Estudar Node", completed: false },
-    { id: 3, description: "Estudar CSS", completed: true },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = (description) => {
     const newTodo = {
