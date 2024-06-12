@@ -5,7 +5,11 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
 
-export const TodoList = ({ todos }) => {
+export const TodoList = ({ todos, onClickDeleteTodo }) => {
+  const handleClickDeleteTodo = (id) => {
+    onClickDeleteTodo(id);
+  };
+
   return (
     <ul className={styles["todo-list"]}>
       {todos.map((todo) => (
@@ -24,6 +28,7 @@ export const TodoList = ({ todos }) => {
               stylesButton["button--icon"],
               styles["todo-list__button"]
             )}
+            onClick={() => handleClickDeleteTodo(todo.id)}
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>

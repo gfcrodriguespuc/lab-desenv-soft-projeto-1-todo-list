@@ -9,21 +9,28 @@ import { TodoList } from "../TodoList";
 export const TodoWrapper = () => {
   const [todos, setTodos] = useState([]);
 
+  const refreshTodos = () => {
+    const savedTodos = todoApi.getAllTodos();
+    setTodos(savedTodos);
+  };
+
   const addTodo = (description) => {
     const newTodo = {
       id: uuidv4(),
       description,
       completed: false,
     };
-
     todoApi.saveTodo(newTodo);
+    refreshTodos();
+  };
 
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
+  const onClickDeleteTodo = (id) => {
+    todoApi.deleteTodoById(id);
+    refreshTodos();
   };
 
   useEffect(() => {
-    const savedTodos = todoApi.getAllTodos();
-    setTodos(savedTodos);
+    refreshTodos();
   }, []);
 
   return (
@@ -32,7 +39,7 @@ export const TodoWrapper = () => {
       <div className={styles["todo-wrapper__form"]}>
         <TodoForm addTodo={addTodo} />
       </div>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onClickDeleteTodo={onClickDeleteTodo} />
     </article>
   );
 };

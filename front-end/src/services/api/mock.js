@@ -13,3 +13,9 @@ export function saveTodo(todo) {
   todos.push(todo);
   saveTodos(todos);
 }
+
+export function deleteTodoById(id) {
+  const todos = getAllTodos();
+  const updatedTodos = todos.filter((todo) => todo.id !== id);
+  saveTodos(updatedTodos);
+}
