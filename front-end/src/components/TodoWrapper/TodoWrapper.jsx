@@ -24,6 +24,22 @@ export const TodoWrapper = () => {
     refreshTodos();
   };
 
+  const onClickCompleteTodo = (id) => {
+    // todoApi.completeTodoById(id);
+
+    const todoToUpdate = todos.find((todo) => todo.id === id);
+    if (!todoToUpdate) {
+      return;
+    }
+
+    const todoUpdated = {
+      ...todoToUpdate,
+      completed: !todoToUpdate.completed,
+    };
+    todoApi.updateTodoById(id, todoUpdated);
+    refreshTodos();
+  };
+
   const onClickDeleteTodo = (id) => {
     todoApi.deleteTodoById(id);
     refreshTodos();
@@ -39,7 +55,11 @@ export const TodoWrapper = () => {
       <div className={styles["todo-wrapper__form"]}>
         <TodoForm addTodo={addTodo} />
       </div>
-      <TodoList todos={todos} onClickDeleteTodo={onClickDeleteTodo} />
+      <TodoList
+        todos={todos}
+        onClickDeleteTodo={onClickDeleteTodo}
+        onClickCompleteTodo={onClickCompleteTodo}
+      />
     </article>
   );
 };

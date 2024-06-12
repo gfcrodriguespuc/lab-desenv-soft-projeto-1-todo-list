@@ -14,6 +14,17 @@ export function saveTodo(todo) {
   saveTodos(todos);
 }
 
+export function updateTodoById(id, updatedTodo) {
+  const todos = getAllTodos();
+  const updatedTodos = todos.map((todo) => {
+    if (todo.id === id) {
+      return updatedTodo;
+    }
+    return todo;
+  });
+  saveTodos(updatedTodos);
+}
+
 export function deleteTodoById(id) {
   const todos = getAllTodos();
   const updatedTodos = todos.filter((todo) => todo.id !== id);
