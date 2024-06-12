@@ -1,7 +1,8 @@
 import styles from "./TodoWrapper.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import * as todoApi from "../../services/api";
 import { TodoForm } from "../TodoForm";
 import { TodoList } from "../TodoList";
 
@@ -13,15 +14,21 @@ export const TodoWrapper = () => {
   ]);
 
   const addTodo = (description) => {
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      {
-        id: uuidv4(),
-        description,
-        completed: false,
-      },
-    ]);
+    const newTodo = {
+      id: uuidv4(),
+      description,
+      completed: false,
+    };
+
+    todoApi.saveTodo(newTodo);
+
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
+
+  useEffect(() => {
+    const savedTodos = todoApi.getAllTodos();
+    setTodos(savedTodos);
+  }, []);
 
   return (
     <article className={styles["todo-wrapper"]}>
