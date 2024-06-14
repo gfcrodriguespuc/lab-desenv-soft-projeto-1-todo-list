@@ -56,35 +56,38 @@ export const TodoForm = ({ addTodo }) => {
           o 2. Média
           o 3. Baixa
       */}
-      <div>
-        Tipo de tarefa:
-        <label>
-          Data prevista
-          <input
-            type="radio"
-            value={TodoType.DUE_DATE}
-            onChange={handleTypeChange}
-            checked={todoType === TodoType.DUE_DATE}
-          />
-        </label>
-        <label>
-          Prazo previsto
-          <input
-            type="radio"
-            value={TodoType.DEADLINE}
-            onChange={handleTypeChange}
-            checked={todoType === TodoType.DEADLINE}
-          />
-        </label>
-        <label>
-          Livre
-          <input
-            type="radio"
-            value={TodoType.FREE}
-            onChange={handleTypeChange}
-            checked={todoType === TodoType.FREE}
-          />
-        </label>
+      <div className={clsx(styles["todo-form__radio-group-wrapper"])}>
+        <b>Tipo de tarefa</b>
+
+        <div className={clsx(styles["todo-form__radio-group"])}>
+          <label>
+            <input
+              type="radio"
+              value={TodoType.DUE_DATE}
+              onChange={handleTypeChange}
+              checked={todoType === TodoType.DUE_DATE}
+            />{" "}
+            Data prevista
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={TodoType.DEADLINE}
+              onChange={handleTypeChange}
+              checked={todoType === TodoType.DEADLINE}
+            />{" "}
+            Prazo previsto
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={TodoType.FREE}
+              onChange={handleTypeChange}
+              checked={todoType === TodoType.FREE}
+            />{" "}
+            Livre
+          </label>
+        </div>
       </div>
 
       <div>
@@ -92,7 +95,8 @@ export const TodoForm = ({ addTodo }) => {
           <input
             className={clsx(
               inputStyles["input-text"],
-              inputStyles["input-text--primary"]
+              inputStyles["input-text--primary"],
+              inputStyles["input-text--full"]
             )}
             type="date"
             min={new Date().toISOString().split("T")[0]}
@@ -105,7 +109,8 @@ export const TodoForm = ({ addTodo }) => {
           <input
             className={clsx(
               inputStyles["input-text"],
-              inputStyles["input-text--primary"]
+              inputStyles["input-text--primary"],
+              inputStyles["input-text--full"]
             )}
             type="number"
             min="1"
@@ -116,38 +121,41 @@ export const TodoForm = ({ addTodo }) => {
         )}
       </div>
 
-      <div>
-        Prioridade:
-        <label>
-          Baixa
-          <input
-            type="radio"
-            value={TodoPriority.LOW}
-            onChange={handlePriorityChange}
-            checked={todoPriority === TodoPriority.LOW}
-          />
-        </label>
-        <label>
-          Média
-          <input
-            type="radio"
-            value={TodoPriority.MEDIUM}
-            onChange={handlePriorityChange}
-            checked={todoPriority === TodoPriority.MEDIUM}
-          />
-        </label>
-        <label>
-          Alta
-          <input
-            type="radio"
-            value={TodoPriority.HIGH}
-            onChange={handlePriorityChange}
-            checked={todoPriority === TodoPriority.HIGH}
-          />
-        </label>
+      <div className={clsx(styles["todo-form__radio-group-wrapper"])}>
+        <b>Prioridade</b>
+
+        <div className={clsx(styles["todo-form__radio-group"])}>
+          <label>
+            <input
+              type="radio"
+              value={TodoPriority.LOW}
+              onChange={handlePriorityChange}
+              checked={todoPriority === TodoPriority.LOW}
+            />{" "}
+            Baixa
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={TodoPriority.MEDIUM}
+              onChange={handlePriorityChange}
+              checked={todoPriority === TodoPriority.MEDIUM}
+            />{" "}
+            Média
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={TodoPriority.HIGH}
+              onChange={handlePriorityChange}
+              checked={todoPriority === TodoPriority.HIGH}
+            />{" "}
+            Alta
+          </label>
+        </div>
       </div>
 
-      <div>
+      <div className={clsx(styles["todo-form__submit-group"])}>
         <input
           className={clsx(
             inputStyles["input-text"],
