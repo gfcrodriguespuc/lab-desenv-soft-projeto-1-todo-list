@@ -16,7 +16,7 @@ services:
     region: oregon
     plan: free
     rootDir: back-end
-    healthCheckPath: /healthz
+    healthCheckPath: /api/healthz
     envVars:
       - key: DATABASE_URL
         fromDatabase:
