@@ -7,6 +7,7 @@
     "start": "npm run dev",
     "dev": "vite",
     "build": "vite build",
+    "build:gh-pages": "vite build --base /lab-desenv-soft-projeto-1-todo-list/",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

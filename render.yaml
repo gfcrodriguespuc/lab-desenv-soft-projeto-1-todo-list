@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: lab-desenv-soft-todo-list
+    runtime: static
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    rootDir: front-end
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
