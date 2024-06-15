@@ -9,3 +9,9 @@ export const TodoPriority = Object.freeze({
   MEDIUM: "MEDIUM",
   HIGH: "HIGH",
 });
+
+export const TodoStatus = Object.freeze({
+  EXPECTED: "EXPECTED",
+  LATE: "LATE",
+  COMPLETED: "COMPLETED",
+});
