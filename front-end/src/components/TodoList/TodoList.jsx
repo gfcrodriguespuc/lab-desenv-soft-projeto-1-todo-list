@@ -66,12 +66,19 @@ export const TodoList = ({ todos, onClickDeleteTodo, onClickCompleteTodo }) => {
             todo.completed && styles["todo-list__item--completed"]
           )}
         >
-          <div>
-            <span className={styles["todo-list__description"]}>
-              {todo.description}
-            </span>
-            <small>{formatTodoStatus(todo)}</small>
+          <div className={styles["todo-list__content"]}>
+            <span>{todo.description}</span>
+            <small
+              className={clsx(
+                styles["todo-list__status"],
+                todo.status.state === TodoStatus.LATE &&
+                  styles["todo-list__status--late"]
+              )}
+            >
+              {formatTodoStatus(todo)}
+            </small>
           </div>
+
           <button
             className={clsx(
               stylesButton["button"],
@@ -84,6 +91,7 @@ export const TodoList = ({ todos, onClickDeleteTodo, onClickCompleteTodo }) => {
           >
             <FontAwesomeIcon icon={faCheck} />
           </button>
+
           <button
             className={clsx(
               stylesButton["button"],

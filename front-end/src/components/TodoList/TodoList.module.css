@@ -19,8 +19,21 @@
   border-radius: var(--app-border-radius-sm);
 }
 
-.todo-list__description {
+.todo-list__content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.todo-list__status {
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+.todo-list__status--late {
+  color: var(--app-palette-white);
+  background: var(--app-palette-danger);
 }
 
 .todo-list__item--completed {
