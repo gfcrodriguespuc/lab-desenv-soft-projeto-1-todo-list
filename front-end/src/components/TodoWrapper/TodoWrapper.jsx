@@ -14,10 +14,10 @@ export const TodoWrapper = () => {
     setTodos(savedTodos);
   };
 
-  const addTodo = (description) => {
+  const addTodo = (todoForm) => {
     const newTodo = {
+      ...todoForm,
       id: uuidv4(),
-      description,
       completed: false,
     };
     todoApi.saveTodo(newTodo);

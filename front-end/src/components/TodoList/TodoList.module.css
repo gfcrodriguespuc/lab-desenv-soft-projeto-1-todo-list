@@ -19,8 +19,45 @@
   border-radius: var(--app-border-radius-sm);
 }
 
-.todo-list__description {
+.todo-list__content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.todo-list__priority {
+  margin-right: 4px;
+}
+
+.todo-list__priority--low {
+  color: #4caf50;
+}
+
+.todo-list__priority--medium {
+  color: var(--app-palette-warning);
+}
+
+.todo-list__priority--high {
+  color: var(--app-palette-danger);
+}
+
+.todo-list__description {
+  display: inline-block;
+}
+
+.todo-list__description:first-letter {
+  text-transform: capitalize;
+}
+
+.todo-list__status {
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+.todo-list__status--late {
+  color: var(--app-palette-white);
+  background: var(--app-palette-danger);
 }
 
 .todo-list__item--completed {
