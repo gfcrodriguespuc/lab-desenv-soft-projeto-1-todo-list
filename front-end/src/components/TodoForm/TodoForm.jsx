@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
 import { useState } from "react";
 import { TodoPriority, TodoType } from "../../models/todo";
+import { nowLocalDateOnlyISOString } from "../../utils/date";
 
 export const TodoForm = ({ addTodo }) => {
   const [todoDescription, setTodoDescription] = useState("");
@@ -99,7 +100,7 @@ export const TodoForm = ({ addTodo }) => {
               inputStyles["input-text--full"]
             )}
             type="date"
-            min={new Date().toISOString().split("T")[0]}
+            min={nowLocalDateOnlyISOString()}
             value={todoDueDate}
             onChange={(event) => setTodoDueDate(event.target.value)}
           />
