@@ -18,8 +18,6 @@ services:
     rootDir: back-end
     healthCheckPath: /healthz
     envVars:
-      - key: PORT
-        value: 8080
       - key: DATABASE_URL
         fromDatabase:
           name: lab-desenv-soft-todo-list-db
