@@ -42,6 +42,14 @@
   color: var(--app-palette-danger);
 }
 
+.todo-list__description {
+  display: inline-block;
+}
+
+.todo-list__description:first-letter {
+  text-transform: capitalize;
+}
+
 .todo-list__status {
   font-size: 0.625rem;
   font-weight: 700;

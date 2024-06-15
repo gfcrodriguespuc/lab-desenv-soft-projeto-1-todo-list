@@ -95,7 +95,9 @@ export const TodoList = ({ todos, onClickDeleteTodo, onClickCompleteTodo }) => {
               >
                 {formatTodoPriority(todo)}
               </span>
-              <span>{todo.description}</span>
+              <span className={clsx(styles["todo-list__description"])}>
+                {todo.description}
+              </span>
             </div>
             <small
               className={clsx(
