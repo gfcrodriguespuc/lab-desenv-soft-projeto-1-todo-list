@@ -4,9 +4,23 @@ import styles from "./TodoList.module.css";
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
-import { TodoStatus, TodoType } from "../../models/todo";
+import { TodoPriority, TodoStatus, TodoType } from "../../models/todo";
 
 export const TodoList = ({ todos, onClickDeleteTodo, onClickCompleteTodo }) => {
+  const formatTodoPriority = (todo) => {
+    // Baixa !, Média !!, Alta !!!
+    switch (todo.priority) {
+      case TodoPriority.LOW:
+        return "!";
+      case TodoPriority.MEDIUM:
+        return "!!";
+      case TodoPriority.HIGH:
+        return "!!!";
+      default:
+        return "";
+    }
+  };
+
   const formatTodoStatus = (todo) => {
     // Prevista, X dias de atraso ou Concluída
     // Prevista ou Concluída
@@ -67,7 +81,22 @@ export const TodoList = ({ todos, onClickDeleteTodo, onClickCompleteTodo }) => {
           )}
         >
           <div className={styles["todo-list__content"]}>
-            <span>{todo.description}</span>
+            <div>
+              <span
+                className={clsx(
+                  styles["todo-list__priority"],
+                  {
+                    [TodoPriority.LOW]: styles["todo-list__priority--low"],
+                    [TodoPriority.MEDIUM]:
+                      styles["todo-list__priority--medium"],
+                    [TodoPriority.HIGH]: styles["todo-list__priority--high"],
+                  }[todo.priority]
+                )}
+              >
+                {formatTodoPriority(todo)}
+              </span>
+              <span>{todo.description}</span>
+            </div>
             <small
               className={clsx(
                 styles["todo-list__status"],

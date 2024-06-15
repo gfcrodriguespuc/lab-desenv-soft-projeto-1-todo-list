@@ -26,6 +26,22 @@
   align-items: flex-start;
 }
 
+.todo-list__priority {
+  margin-right: 4px;
+}
+
+.todo-list__priority--low {
+  color: #4caf50;
+}
+
+.todo-list__priority--medium {
+  color: var(--app-palette-warning);
+}
+
+.todo-list__priority--high {
+  color: var(--app-palette-danger);
+}
+
 .todo-list__status {
   font-size: 0.625rem;
   font-weight: 700;
