@@ -21,10 +21,9 @@ FROM bellsoft/liberica-runtime-container:jre-21.0.3-slim-stream-musl
 # FROM eclipse-temurin:21.0.3_9-jre-alpine
 WORKDIR /app
 
-ENV PORT=8080
 EXPOSE 8080
 
 COPY --from=builder /usr/src/app/target/*.jar app.jar
 
-# CMD ["java", "-Duser.language=pt", "-Duser.country=BR", "-jar", "app.jar", "--server.port=${PORT}"]
-CMD ["java", "-jar", "app.jar", "--server.port=${PORT}"]
+# CMD ["java", "-Duser.language=pt", "-Duser.country=BR", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]

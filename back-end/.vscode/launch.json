@@ -10,6 +10,14 @@
             "request": "launch",
             "mainClass": "com.labdesenvsoft.todolist.TodolistApplication",
             "projectName": "todolist"
+        },
+        {
+            "type": "java",
+            "name": "TodolistApplication .env.local",
+            "request": "launch",
+            "mainClass": "com.labdesenvsoft.todolist.TodolistApplication",
+            "projectName": "todolist",
+            "envFile": "${workspaceFolder}/.env.local"
         }
     ]
 }
