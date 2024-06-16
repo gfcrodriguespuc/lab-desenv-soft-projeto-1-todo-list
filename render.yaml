@@ -18,22 +18,29 @@ services:
     rootDir: back-end
     healthCheckPath: /api/healthz
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: lab-desenv-soft-todo-list-db
-          property: connectionString
-      - key: DATABASE_USER
-        fromDatabase:
-          name: lab-desenv-soft-todo-list-db
-          property: user
-      - key: DATABASE_PASSWORD
-        fromDatabase:
-          name: lab-desenv-soft-todo-list-db
-          property: password
       - key: DATABASE_NAME
         fromDatabase:
           name: lab-desenv-soft-todo-list-db
           property: database
+      - key: DATABASE_HOSTPORT
+        fromDatabase:
+          name: lab-desenv-soft-todo-list-db
+          property: hostport
+      # OBS: Essa variável de ambiente deve ser configurada manualmente no
+      # painel do Render, usando os valores em DATABASE_NAME e DATABASE_HOSTPORT,
+      # pois o blueprint não suporta interpolação de variáveis de ambiente.
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://<host>:<port>/<database>
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: lab-desenv-soft-todo-list-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: lab-desenv-soft-todo-list-db
+          property: password
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.postgresql.Driver
 
 databases:
   - name: lab-desenv-soft-todo-list-db
