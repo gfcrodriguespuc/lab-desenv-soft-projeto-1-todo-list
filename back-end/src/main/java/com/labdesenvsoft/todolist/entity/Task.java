@@ -64,8 +64,12 @@ public class Task {
 
     @PostLoad
     public void postLoad() {
-        // TODO: Implementar lógica para calcular o status da tarefa
-        System.out.println("PostLoad");
+        this.status = new TaskStatus(
+                this.type,
+                this.createdAt,
+                this.dueDate,
+                this.deadline,
+                this.completed);
     }
 
     @Override
