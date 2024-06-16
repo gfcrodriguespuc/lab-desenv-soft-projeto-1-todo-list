@@ -37,10 +37,10 @@ public class Task {
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
     // https://stackoverflow.com/questions/68154679/how-to-include-check-in-jpa-column-columndefinition
-    @Column(columnDefinition = "TINYINT DEFAULT 0 CHECK (type between 0 and 2)", nullable = false)
+    @Column(columnDefinition = "SMALLINT DEFAULT 0 CHECK (type between 0 and 2)", nullable = false)
     private TodoType type = TodoType.FREE; // 0 - FREE
 
-    @Column(columnDefinition = "TINYINT DEFAULT 0 CHECK (priority between 0 and 2)", nullable = false)
+    @Column(columnDefinition = "SMALLINT DEFAULT 0 CHECK (priority between 0 and 2)", nullable = false)
     private TodoPriority priority = TodoPriority.LOW; // 0 - LOW
 
     private Date dueDate;
