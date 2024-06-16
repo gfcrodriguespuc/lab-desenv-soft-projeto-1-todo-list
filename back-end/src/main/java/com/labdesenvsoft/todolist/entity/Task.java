@@ -1,7 +1,7 @@
 package com.labdesenvsoft.todolist.entity;
 
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 import com.labdesenvsoft.todolist.domain.TaskStatus;
 import com.labdesenvsoft.todolist.domain.TodoPriority;
@@ -34,7 +34,7 @@ public class Task {
     private Long id;
 
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP", nullable = false, insertable = false, updatable = false)
-    private OffsetDateTime createdAt = OffsetDateTime.now();
+    private Instant createdAt = Instant.now();
 
     // https://stackoverflow.com/questions/68154679/how-to-include-check-in-jpa-column-columndefinition
     @Column(columnDefinition = "SMALLINT DEFAULT 0 CHECK (type between 0 and 2)", nullable = false)
