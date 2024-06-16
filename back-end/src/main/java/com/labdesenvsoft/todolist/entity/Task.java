@@ -33,7 +33,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false, insertable = false, updatable = false)
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP", nullable = false, insertable = false, updatable = false)
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
     // https://stackoverflow.com/questions/68154679/how-to-include-check-in-jpa-column-columndefinition
