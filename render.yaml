@@ -18,17 +18,22 @@ services:
     rootDir: back-end
     healthCheckPath: /api/healthz
     envVars:
+      - key: DATABASE_HOST
+        fromDatabase:
+          name: lab-desenv-soft-todo-list-db
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: lab-desenv-soft-todo-list-db
+          property: port
       - key: DATABASE_NAME
         fromDatabase:
           name: lab-desenv-soft-todo-list-db
           property: database
-      - key: DATABASE_HOSTPORT
-        fromDatabase:
-          name: lab-desenv-soft-todo-list-db
-          property: hostport
       # OBS: Essa variável de ambiente deve ser configurada manualmente no
-      # painel do Render, usando os valores em DATABASE_NAME e DATABASE_HOSTPORT,
-      # pois o blueprint não suporta interpolação de variáveis de ambiente.
+      # painel do Render, usando os valores em DATABASE_HOST, DATABASE_PORT e
+      # DATABASE_NAME, pois o blueprint não suporta interpolação de variáveis
+      # de ambiente.
       - key: SPRING_DATASOURCE_URL
         value: jdbc:postgresql://<host>:<port>/<database>
       - key: SPRING_DATASOURCE_USERNAME
