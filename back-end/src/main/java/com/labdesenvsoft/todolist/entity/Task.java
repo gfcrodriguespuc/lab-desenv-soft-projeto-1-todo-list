@@ -1,7 +1,7 @@
 package com.labdesenvsoft.todolist.entity;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.Date;
 
 import com.labdesenvsoft.todolist.domain.TaskStatus;
 import com.labdesenvsoft.todolist.domain.TodoPriority;
@@ -43,7 +43,8 @@ public class Task {
     @Column(columnDefinition = "SMALLINT DEFAULT 0 CHECK (priority between 0 and 2)", nullable = false)
     private TodoPriority priority = TodoPriority.LOW; // 0 - LOW
 
-    private Date dueDate;
+    @Column(columnDefinition = "DATE")
+    private LocalDate dueDate;
 
     private Integer deadline;
 
