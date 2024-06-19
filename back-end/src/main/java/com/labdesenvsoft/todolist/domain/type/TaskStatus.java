@@ -1,4 +1,4 @@
-package com.labdesenvsoft.todolist.domain;
+package com.labdesenvsoft.todolist.domain.type;
 
 import java.time.Instant;
 import java.time.LocalDate;

@@ -1,11 +1,11 @@
-package com.labdesenvsoft.todolist.entity;
+package com.labdesenvsoft.todolist.domain.entity;
 
 import java.time.Instant;
 import java.time.LocalDate;
 
-import com.labdesenvsoft.todolist.domain.TaskStatus;
-import com.labdesenvsoft.todolist.domain.TodoPriority;
-import com.labdesenvsoft.todolist.domain.TodoType;
+import com.labdesenvsoft.todolist.domain.type.TaskStatus;
+import com.labdesenvsoft.todolist.domain.type.TodoPriority;
+import com.labdesenvsoft.todolist.domain.type.TodoType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;

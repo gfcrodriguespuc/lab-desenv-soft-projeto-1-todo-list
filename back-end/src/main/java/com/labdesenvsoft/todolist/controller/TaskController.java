@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.labdesenvsoft.todolist.entity.Task;
+import com.labdesenvsoft.todolist.domain.entity.Task;
 import com.labdesenvsoft.todolist.repository.ITaskRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
