@@ -30,7 +30,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     @Operation(summary = "Busca todas as tarefas da lista de tarefas")
-    public ResponseEntity<Iterable<Task>> getAllTasks() {
+    public ResponseEntity<Collection<Task>> getAllTasks() {
         Collection<Task> tasks = taskService.getAllTasks();
 
         if (tasks.isEmpty()) {
