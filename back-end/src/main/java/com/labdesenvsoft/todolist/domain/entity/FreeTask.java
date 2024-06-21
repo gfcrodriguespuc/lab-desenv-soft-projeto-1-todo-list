@@ -1,5 +1,6 @@
 package com.labdesenvsoft.todolist.domain.entity;
 
+import com.labdesenvsoft.todolist.domain.exception.TaskValidationException;
 import com.labdesenvsoft.todolist.domain.type.TaskStatus;
 import com.labdesenvsoft.todolist.domain.type.TodoPriority;
 import com.labdesenvsoft.todolist.domain.type.TodoType;
@@ -18,7 +19,8 @@ public class FreeTask extends Task {
     public FreeTask(
             TodoPriority priority,
             String description,
-            Boolean completed) {
+            Boolean completed)
+            throws TaskValidationException {
         super(TodoType.FREE, priority, description, completed);
     }
 

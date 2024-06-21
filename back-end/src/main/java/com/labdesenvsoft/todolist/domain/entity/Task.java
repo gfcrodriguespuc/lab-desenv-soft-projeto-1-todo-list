@@ -2,6 +2,7 @@ package com.labdesenvsoft.todolist.domain.entity;
 
 import java.time.Instant;
 
+import com.labdesenvsoft.todolist.domain.exception.TaskValidationException;
 import com.labdesenvsoft.todolist.domain.type.TaskStatus;
 import com.labdesenvsoft.todolist.domain.type.TodoPriority;
 import com.labdesenvsoft.todolist.domain.type.TodoType;
@@ -56,7 +57,17 @@ public abstract class Task {
     @Setter(AccessLevel.NONE)
     private TaskStatus status;
 
-    public Task(TodoType type, TodoPriority priority, String description, Boolean completed) {
+    public Task(
+            TodoType type,
+            TodoPriority priority,
+            String description,
+            Boolean completed)
+            throws TaskValidationException {
+        if (description == null || description.length() < 10) {
+            throw new TaskValidationException(
+                    "Descrição da tarefa deve possuir no mínimo 10 caracteres");
+        }
+
         this.type = type;
         this.description = description;
 

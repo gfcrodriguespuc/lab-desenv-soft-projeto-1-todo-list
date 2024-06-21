@@ -2,6 +2,7 @@ package com.labdesenvsoft.todolist.domain.entity;
 
 import java.time.LocalDate;
 
+import com.labdesenvsoft.todolist.domain.exception.TaskValidationException;
 import com.labdesenvsoft.todolist.domain.type.TaskStatus;
 import com.labdesenvsoft.todolist.domain.type.TodoPriority;
 import com.labdesenvsoft.todolist.domain.type.TodoType;
@@ -25,8 +26,15 @@ public class DueDateTask extends Task {
             TodoPriority priority,
             String description,
             Boolean completed,
-            LocalDate dueDate) {
+            LocalDate dueDate)
+            throws TaskValidationException {
         super(TodoType.DUE_DATE, priority, description, completed);
+
+        if (dueDate == null || dueDate.isBefore(LocalDate.now())) {
+            throw new TaskValidationException(
+                    "A data prevista de execução da tarefa deverá ser sempre igual ou superior a data atual.");
+        }
+
         this.dueDate = dueDate;
     }
 

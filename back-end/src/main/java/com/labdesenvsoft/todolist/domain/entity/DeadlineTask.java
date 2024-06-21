@@ -3,6 +3,7 @@ package com.labdesenvsoft.todolist.domain.entity;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+import com.labdesenvsoft.todolist.domain.exception.TaskValidationException;
 import com.labdesenvsoft.todolist.domain.type.TaskStatus;
 import com.labdesenvsoft.todolist.domain.type.TodoPriority;
 import com.labdesenvsoft.todolist.domain.type.TodoType;
@@ -24,7 +25,8 @@ public class DeadlineTask extends Task {
             TodoPriority priority,
             String description,
             Boolean completed,
-            Integer deadline) {
+            Integer deadline)
+            throws TaskValidationException {
         super(TodoType.DEADLINE, priority, description, completed);
         this.deadline = deadline;
     }

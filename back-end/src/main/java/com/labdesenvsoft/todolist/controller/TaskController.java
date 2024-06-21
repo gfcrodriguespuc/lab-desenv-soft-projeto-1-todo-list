@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.labdesenvsoft.todolist.controller.dto.TaskDTO;
 import com.labdesenvsoft.todolist.domain.entity.Task;
 import com.labdesenvsoft.todolist.domain.exception.TaskNotFoundException;
+import com.labdesenvsoft.todolist.domain.exception.TaskValidationException;
 import com.labdesenvsoft.todolist.service.TaskService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,7 +42,10 @@ public class TaskController {
 
     @PostMapping("/tasks")
     @Operation(summary = "Cria uma nova tarefa")
-    public ResponseEntity<Void> postTask(@RequestBody TaskDTO taskToCreateDTO, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Void> postTask(
+            @RequestBody TaskDTO taskToCreateDTO,
+            UriComponentsBuilder uriBuilder)
+            throws TaskValidationException {
         Task taskToCreate = taskToCreateDTO.toTask();
 
         long taskId = taskService.createTask(taskToCreate);
@@ -63,7 +67,7 @@ public class TaskController {
     @PutMapping("/tasks/{id}")
     @Operation(summary = "Atualiza uma tarefa existente")
     public ResponseEntity<Void> putTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO)
-            throws TaskNotFoundException {
+            throws TaskValidationException, TaskNotFoundException {
         Task task = taskDTO.toTask();
         taskService.updateTask(id, task);
         return ResponseEntity.noContent().build();

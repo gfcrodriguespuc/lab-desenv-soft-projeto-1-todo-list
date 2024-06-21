@@ -6,6 +6,7 @@ import com.labdesenvsoft.todolist.domain.entity.DeadlineTask;
 import com.labdesenvsoft.todolist.domain.entity.DueDateTask;
 import com.labdesenvsoft.todolist.domain.entity.FreeTask;
 import com.labdesenvsoft.todolist.domain.entity.Task;
+import com.labdesenvsoft.todolist.domain.exception.TaskValidationException;
 import com.labdesenvsoft.todolist.domain.type.TodoPriority;
 import com.labdesenvsoft.todolist.domain.type.TodoType;
 
@@ -26,7 +27,7 @@ public class TaskDTO {
     public String description;
     public Boolean completed;
 
-    public Task toTask() {
+    public Task toTask() throws TaskValidationException {
         if (type == TodoType.DEADLINE) {
             return new DeadlineTask(priority, description, completed, deadline);
         } else if (type == TodoType.DUE_DATE) {
