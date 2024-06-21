@@ -1,7 +1,6 @@
 package com.labdesenvsoft.todolist.domain.entity;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 import com.labdesenvsoft.todolist.domain.type.TaskStatus;
 import com.labdesenvsoft.todolist.domain.type.TodoPriority;
@@ -13,9 +12,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +29,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "Representa uma tarefa da lista de tarefas")
-public class Task {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,17 +39,11 @@ public class Task {
     @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP", nullable = false, insertable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
-    // https://stackoverflow.com/questions/68154679/how-to-include-check-in-jpa-column-columndefinition
-    @Column(columnDefinition = "SMALLINT DEFAULT 0 CHECK (type between 0 and 2)", nullable = false)
-    private TodoType type = TodoType.FREE; // 0 - FREE
+    @Column(nullable = false)
+    private TodoType type;
 
-    @Column(columnDefinition = "SMALLINT DEFAULT 0 CHECK (priority between 0 and 2)", nullable = false)
+    @Column(nullable = false)
     private TodoPriority priority = TodoPriority.LOW; // 0 - LOW
-
-    @Column(columnDefinition = "DATE")
-    private LocalDate dueDate;
-
-    private Integer deadline;
 
     @Schema(description = "Descrição da tarefa, deve possuir no mínimo 10 caracteres")
     @Size(min = 10, message = "Descrição da tarefa deve possuir no mínimo 10 caracteres")
@@ -56,20 +53,27 @@ public class Task {
 
     // https://prateek-ashtikar512.medium.com/how-to-calculate-non-persistent-property-via-hibernate-formula-6a20b51c4c86
     @Transient
+    @Setter(AccessLevel.NONE)
     private TaskStatus status;
 
-    public Task(String description) {
+    public Task(TodoType type, TodoPriority priority, String description, Boolean completed) {
+        this.type = type;
         this.description = description;
+
+        if (priority != null) {
+            this.priority = priority;
+        }
+
+        if (completed != null) {
+            this.completed = completed;
+        }
     }
+
+    protected abstract TaskStatus calculateStatus();
 
     @PostLoad
     public void postLoad() {
-        this.status = new TaskStatus(
-                this.type,
-                this.createdAt,
-                this.dueDate,
-                this.deadline,
-                this.completed);
+        this.status = calculateStatus();
     }
 
     @Override

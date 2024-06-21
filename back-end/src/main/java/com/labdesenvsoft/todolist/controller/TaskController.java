@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.labdesenvsoft.todolist.controller.dto.TaskDTO;
 import com.labdesenvsoft.todolist.domain.entity.Task;
 import com.labdesenvsoft.todolist.domain.exception.TaskNotFoundException;
 import com.labdesenvsoft.todolist.service.TaskService;
@@ -40,7 +41,9 @@ public class TaskController {
 
     @PostMapping("/tasks")
     @Operation(summary = "Cria uma nova tarefa")
-    public ResponseEntity<Void> postTask(@RequestBody Task taskToCreate, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Void> postTask(@RequestBody TaskDTO taskToCreateDTO, UriComponentsBuilder uriBuilder) {
+        Task taskToCreate = taskToCreateDTO.toTask();
+
         long taskId = taskService.createTask(taskToCreate);
 
         UriComponents uriComponents = uriBuilder
@@ -59,7 +62,9 @@ public class TaskController {
 
     @PutMapping("/tasks/{id}")
     @Operation(summary = "Atualiza uma tarefa existente")
-    public ResponseEntity<Void> putTask(@PathVariable Long id, @RequestBody Task task) throws TaskNotFoundException {
+    public ResponseEntity<Void> putTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO)
+            throws TaskNotFoundException {
+        Task task = taskDTO.toTask();
         taskService.updateTask(id, task);
         return ResponseEntity.noContent().build();
     }

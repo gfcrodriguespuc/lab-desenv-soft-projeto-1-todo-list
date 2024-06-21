@@ -1,9 +1,6 @@
 package com.labdesenvsoft.todolist.domain.type;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-
 import lombok.Getter;
 
 @Getter
@@ -13,37 +10,25 @@ public class TaskStatus {
     private Integer days;
     private LocalDate dueDate;
 
-    public TaskStatus(TodoType type, Instant createdAt, LocalDate dueDate, Integer deadline, boolean completed) {
+    public TaskStatus(LocalDate dueDate, boolean completed) {
         if (completed) {
             this.state = TaskStatusState.COMPLETED;
             return;
         }
 
-        // XXX: Verificar como a timezone do servidor influencia no cálculo de dias
-        switch (type) {
-            case FREE:
-                this.state = TaskStatusState.EXPECTED;
-                break;
-            case DUE_DATE:
-                this.dueDate = dueDate;
-                this.state = calculateState(this.dueDate);
-                this.days = calculateDays(this.dueDate);
-                break;
-            case DEADLINE:
-                // O deadline é a quantidade de dias que a tarefa tem para ser
-                // concluída, assim, a data de vencimento é a data de criação
-                // mais o prazo em dias
-                LocalDate deadlineDueDate = createdAt
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()
-                        .plusDays(deadline);
-                this.dueDate = deadlineDueDate;
-                this.state = calculateState(this.dueDate);
-                this.days = calculateDays(this.dueDate);
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de tarefa inesperado: " + type);
+        if (dueDate == null) {
+            this.state = TaskStatusState.EXPECTED;
+            return;
         }
+
+        // XXX: Verificar como a timezone do servidor influencia no cálculo de dias
+        this.state = calculateState(dueDate);
+        this.days = calculateDays(dueDate);
+        this.dueDate = dueDate;
+    }
+
+    public TaskStatus(boolean completed) {
+        this(null, completed);
     }
 
     private static int calculateDays(LocalDate dueDate) {
