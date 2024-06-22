@@ -1,48 +1,90 @@
 import styles from "./TodoWrapper.module.css";
 
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import * as todoApi from "../../services/api";
 import { TodoForm } from "../TodoForm";
 import { TodoList } from "../TodoList";
 
 export const TodoWrapper = () => {
+  const [loadings, setLoadings] = useState(0);
   const [todos, setTodos] = useState([]);
 
-  const refreshTodos = () => {
-    const savedTodos = todoApi.getAllTodos();
-    setTodos(savedTodos);
+  const isLoading = loadings > 0;
+
+  const addLoading = () => {
+    setLoadings((l) => l + 1);
   };
 
-  const addTodo = (todoForm) => {
-    const newTodo = {
-      ...todoForm,
-      id: uuidv4(),
-      completed: false,
-    };
-    todoApi.saveTodo(newTodo);
-    refreshTodos();
+  const removeLoading = () => {
+    setLoadings((l) => l - 1);
   };
 
-  const onClickCompleteTodo = (id) => {
-    // todoApi.completeTodoById(id);
-
-    const todoToUpdate = todos.find((todo) => todo.id === id);
-    if (!todoToUpdate) {
-      return;
+  const refreshTodos = async () => {
+    try {
+      addLoading();
+      const savedTodos = await todoApi.getAllTasks();
+      setTodos(savedTodos);
+    } catch (error) {
+      console.error("Erro ao buscar as tarefas", error);
+      alert(`Erro ao buscar as tarefas: ${error.message}`);
+    } finally {
+      removeLoading();
     }
-
-    const todoUpdated = {
-      ...todoToUpdate,
-      completed: !todoToUpdate.completed,
-    };
-    todoApi.updateTodoById(id, todoUpdated);
-    refreshTodos();
   };
 
-  const onClickDeleteTodo = (id) => {
-    todoApi.deleteTodoById(id);
-    refreshTodos();
+  const addTodo = async (todoForm) => {
+    try {
+      addLoading();
+      const newTodo = {
+        ...todoForm,
+        completed: false,
+      };
+      await todoApi.postTask(newTodo);
+      refreshTodos();
+    } catch (error) {
+      console.error("Erro ao adicionar a tarefa", error);
+      alert(`Erro ao adicionar a tarefa: ${error.message}`);
+    } finally {
+      removeLoading();
+    }
+  };
+
+  const onClickCompleteTodo = async (id) => {
+    try {
+      addLoading();
+
+      // todoApi.completeTodoById(id);
+
+      const todoToUpdate = todos.find((todo) => todo.id === id);
+      if (!todoToUpdate) {
+        return;
+      }
+
+      const todoUpdated = {
+        ...todoToUpdate,
+        completed: !todoToUpdate.completed,
+      };
+      await todoApi.putTask(id, todoUpdated);
+      refreshTodos();
+    } catch (error) {
+      console.error("Erro ao completar a tarefa", error);
+      alert(`Erro ao completar a tarefa: ${error.message}`);
+    } finally {
+      removeLoading();
+    }
+  };
+
+  const onClickDeleteTodo = async (id) => {
+    try {
+      addLoading();
+      await todoApi.deleteTask(id);
+      refreshTodos();
+    } catch (error) {
+      console.error("Erro ao deletar a tarefa", error);
+      alert(`Erro ao deletar a tarefa: ${error.message}`);
+    } finally {
+      removeLoading();
+    }
   };
 
   useEffect(() => {
@@ -55,6 +97,9 @@ export const TodoWrapper = () => {
       <div className={styles["todo-wrapper__form"]}>
         <TodoForm addTodo={addTodo} />
       </div>
+
+      {isLoading && <p>Carregando...</p>}
+
       <TodoList
         todos={todos}
         onClickDeleteTodo={onClickDeleteTodo}
