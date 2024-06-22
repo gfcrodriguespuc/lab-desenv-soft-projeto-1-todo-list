@@ -3,6 +3,12 @@ services:
     name: lab-desenv-soft-todo-list
     runtime: static
     buildCommand: npm run build
+    envVars:
+      # OBS: Essa variável de ambiente deve ser configurada manualmente no
+      # painel do Render, pois o blueprint não possui uma forma de obter o
+      # endereço publico do serviço de API.
+      - key: VITE_API_URL
+        value: http://<host>:<port>/api/
     staticPublishPath: ./dist
     rootDir: front-end
     routes:

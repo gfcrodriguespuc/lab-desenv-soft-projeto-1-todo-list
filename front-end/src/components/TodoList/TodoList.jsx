@@ -41,7 +41,7 @@ export const TodoList = ({ todos, onClickDeleteTodo, onClickCompleteTodo }) => {
         ? "Prevista para hoje"
         : diffDays === 1
         ? "Prevista para amanhã"
-        : `Prevista para ${todo.status.dueDate.toLocaleDateString()}`;
+        : `Prevista para ${new Date(todo.status.dueDate).toLocaleDateString()}`;
     }
 
     if (todo.type === TodoType.DEADLINE) {
