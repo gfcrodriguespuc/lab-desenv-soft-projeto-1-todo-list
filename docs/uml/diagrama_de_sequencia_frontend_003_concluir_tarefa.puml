@@ -1,0 +1,19 @@
+@startuml diagrama_de_sequencia_frontend_003_concluir_tarefa
+actor Usuário as u
+participant SPA as "Single-Page App"
+participant API as "API Application"
+
+u -> SPA: Interage com a interface da aplicação
+
+alt Conclusão de Tarefa
+    SPA -> API: PUT /tasks/{id}
+    API --> SPA: Resposta 204 No Content
+end
+
+alt Busca de Tarefas Atualizada
+    SPA -> API: GET /tasks
+    API --> SPA: Lista de tarefas atualizada
+    SPA -> SPA: Exibe a lista de tarefas na interface
+end
+
+@enduml

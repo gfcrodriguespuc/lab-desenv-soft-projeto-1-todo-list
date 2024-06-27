@@ -1,0 +1,12 @@
+@startuml diagrama_de_sequencia_frontend_001_ler_tarefas
+actor Usuário as u
+participant SPA as "Single-Page App"
+participant API as "API Application"
+
+u -> SPA: Interage com a interface da aplicação
+
+SPA -> API: GET /tasks
+API --> SPA: Lista de tarefas
+SPA -> SPA: Exibe a lista de tarefas na interface
+
+@enduml
