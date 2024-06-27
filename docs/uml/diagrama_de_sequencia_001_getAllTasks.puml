@@ -1,0 +1,9 @@
+@startuml diagrama_de_sequencia_001_getAllTasks
+actor Usuário
+Usuário -> TaskController: GET /tasks
+TaskController -> TaskService: getAllTasks()
+TaskService -> ITaskRepository: findAll()
+ITaskRepository --> TaskService: Collection<Task>
+TaskService --> TaskController: Collection<Task>
+TaskController --> Usuário: 200 OK (Collection<Task>)
+@enduml

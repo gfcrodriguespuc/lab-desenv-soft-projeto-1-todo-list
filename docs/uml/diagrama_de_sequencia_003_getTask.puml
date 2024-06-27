@@ -1,0 +1,15 @@
+@startuml diagrama_de_sequencia_003_getTask
+actor Usuário
+Usuário -> TaskController: GET /tasks/{id}
+TaskController -> TaskService: getTaskById(id)
+TaskService -> ITaskRepository: findById(id)
+alt Task encontrado
+    ITaskRepository --> TaskService: Optional<Task>
+    TaskService -> TaskController: Task
+    TaskController --> Usuário: 200 OK (Task)
+else Task não encontrado
+    ITaskRepository --> TaskService: Optional.empty
+    TaskService -> TaskNotFoundException: throw
+    TaskController -> Usuário: 404 Not Found (TaskNotFoundException)
+end
+@enduml

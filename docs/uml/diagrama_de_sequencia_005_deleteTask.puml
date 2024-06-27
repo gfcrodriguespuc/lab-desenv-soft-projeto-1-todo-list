@@ -1,0 +1,17 @@
+@startuml diagrama_de_sequencia_005_deleteTask
+actor Usuário
+Usuário -> TaskController: DELETE /tasks/{id}
+TaskController -> TaskService: deleteTask(id)
+TaskService -> TaskService: getTaskById(id)
+TaskService -> ITaskRepository: findById(id)
+alt Task encontrado
+    ITaskRepository --> TaskService: Optional<Task>
+    TaskService -> ITaskRepository: delete(Task)
+    TaskService --> TaskController: void
+    TaskController --> Usuário: 204 No Content
+else Task não encontrado
+    ITaskRepository --> TaskService: Optional.empty
+    TaskService -> TaskNotFoundException: throw
+    TaskController -> Usuário: 404 Not Found (TaskNotFoundException)
+end
+@enduml

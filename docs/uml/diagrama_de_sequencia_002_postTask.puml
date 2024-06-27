@@ -1,0 +1,10 @@
+@startuml diagrama_de_sequencia_002_postTask
+actor Usuário
+Usuário -> TaskController: POST /tasks (TaskDTO)
+TaskController -> TaskDTO: toTask()
+TaskController -> TaskService: createTask(Task)
+TaskService -> ITaskRepository: save(Task)
+ITaskRepository --> TaskService: Task (com ID)
+TaskService --> TaskController: Task ID
+TaskController --> Usuário: 201 Created (Location: /tasks/{id})
+@enduml

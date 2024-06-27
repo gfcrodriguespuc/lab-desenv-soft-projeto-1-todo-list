@@ -1,0 +1,12 @@
+@startuml c4model_nivel_1_diagrama_de_contexto
+!include <C4/C4_Context>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de contexto do sistema de Lista de Tarefas
+
+Person(user, "Usuário", "Um usuário com tarefas a serem gerenciadas.", $type="Person")
+System(todolist_system, "Sistema de Lista de Tarefas", "Permite ao usuário gerenciar suas tarefas.", $type="Software System")
+
+Rel(user, todolist_system, "Utiliza")
+@enduml
