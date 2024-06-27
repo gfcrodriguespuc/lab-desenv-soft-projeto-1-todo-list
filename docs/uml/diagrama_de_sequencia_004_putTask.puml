@@ -1,0 +1,27 @@
+@startuml diagrama_de_sequencia_004_putTask
+actor Usuário
+Usuário -> TaskController: PUT /tasks/{id}
+TaskController -> TaskDTO: toTask()
+
+alt TaskDTO válido
+    TaskDTO --> TaskController: Task
+    TaskController -> TaskService: updateTask(id, Task)
+    TaskService -> TaskService: getTaskById(id)
+    TaskService -> ITaskRepository: findById(id)
+    alt Task encontrado
+        ITaskRepository --> TaskService: Optional<Task>
+        TaskService -> Task: setDescription(), setCompleted()
+        TaskService -> ITaskRepository: save(Task)
+        ITaskRepository --> TaskService: Task
+        TaskService --> TaskController: void
+        TaskController --> Usuário: 204 No Content
+    else Task não encontrado
+        ITaskRepository --> TaskService: Optional.empty
+        TaskService -> TaskNotFoundException: throw
+        TaskController -> Usuário: 404 Not Found (TaskNotFoundException)
+    end
+else TaskDTO inválido
+    TaskDTO -> TaskValidationException: throw
+    TaskController -> Usuário: 400 Bad Request (TaskValidationException)
+end
+@enduml
