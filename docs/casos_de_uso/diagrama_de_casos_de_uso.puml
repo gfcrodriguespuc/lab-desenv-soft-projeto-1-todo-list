@@ -1,0 +1,20 @@
+@startuml diagrama_de_casos_de_uso
+left to right direction
+
+actor Usuário as u
+
+rectangle Sistema {
+    usecase "Criar Tarefa"
+    usecase "Consultar Tarefa"
+    usecase "Editar Tarefa"
+    usecase "Deletar Tarefa"
+    usecase "Listar Tarefas"
+}
+
+u --> "Criar Tarefa"
+u --> "Consultar Tarefa"
+u --> "Editar Tarefa"
+u --> "Deletar Tarefa"
+u --> "Listar Tarefas"
+
+@enduml
