@@ -1,0 +1,23 @@
+@startuml c4model_nivel_2_diagrama_de_container
+!include <C4/C4_Container>
+
+' LAYOUT_TOP_DOWN()
+' LAYOUT_AS_SKETCH()
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de container do sistema de Lista de Tarefas
+
+Person(user, "Usuário", "Um usuário com tarefas a serem gerenciadas.", $type="Person")
+
+System_Boundary(c1, "Sistema de Lista de Tarefas") {
+    Container(web_server, "Web Server", "Render, static site", "Entrega o conteúdo estático e a aplicação SPA de Lista de Tarefas")
+    Container(spa, "Single-Page App", "JavaScript, React.js", "Fornece toda a funcionalidade do Sistema de Lista de Tarefas para os clientes por meio de seu navegador web")
+    Container(backend_api, "API Application", "Java, Spring Boot, Docker Container", "Fornece as funcionalidades do Sistema de Lista de Tarefas via API")
+    ContainerDb(database, "Banco de dados", "PostgreSQL", "Armazena informações de registros de tarefas")
+}
+
+Rel(user, web_server, "Utiliza", "HTTPS")
+Rel_Neighbor(web_server, spa, "Entrega")
+Rel(spa, backend_api, "Utiliza", "async, JSON/HTTPS")
+Rel_Back_Neighbor(database, backend_api, "Lê e escreve", "sync, JDBC")
+@enduml
